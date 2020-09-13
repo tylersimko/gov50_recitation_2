@@ -1,0 +1,28 @@
+---
+title: 'Recitation #2: Agenda'
+author: "Tyler Simko"
+date: "9/13/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I have played a sneaky trick. By placing this template file on GitHub, we accomplished three goals at once:
+
+1. You practiced cloning a repository from GitHub! 
+2. You now know the agenda for today's recitation.
+3. You now have a handy place to take notes and practice code for today. 
+
+A fourth, smaller, goal is that you can see some cool formatting tricks in RMarkdown (like the numbered list above). You can find a bunch more by looking at this [list of cheat sheets](https://rstudio.com/resources/cheatsheets/).
+
+## Census Maps
+
+A very common data source for many of you will be the US Census. You can get a ton of demographic information at multiple levels, from the state to the neighborhood level. We're going to walk through [a few sections of the textbook together](https://davidkane9.github.io/PPBDS/maps.html). 
+
+## Some Practice
+
+Here are some topics that students asked to cover in Recitation:
+
+#### 1. joins (full, inner, left, right, etc.)
