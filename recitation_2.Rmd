@@ -26,3 +26,7 @@ A very common data source for many of you will be the US Census. You can get a t
 Here are some topics that students asked to cover in Recitation:
 
 #### 1. joins (full, inner, left, right, etc.)
+
+#### 2. plot themes
+
+#### 3. if_else
