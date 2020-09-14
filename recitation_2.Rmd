@@ -78,7 +78,7 @@ shaming %>%
     coord_cartesian(ylim(0.2, 0.45))
 ```
 
-```{r bug-3, eval=FALSE}
+```{r bug-3.1, eval=FALSE}
 #####################################################
 # 3. Object not found
 #####################################################
@@ -87,7 +87,9 @@ shaming %>%
 
 cces %>%
   mutate(Age = Age / 10)
+```
 
+```{r bug-3.2, eval=FALSE}
 # Example 2
 
 sps %>% 
@@ -95,7 +97,9 @@ sps %>%
 
 ggplot(sps, aes(x = age, y = health_exp_3m, fill = treatment_string)) + 
   geom_col()
+```
 
+```{r bug-3.3, eval=FALSE}
 # Example 3
 
 sps_edited <- sps %>% 
@@ -103,21 +107,27 @@ sps_edited <- sps %>%
 
 ggplot(sps, aes(x = age, y = health_exp_3m, fill = treatment_string)) + 
   geom_col()
+```
 
+```{r bug-3.4, eval=FALSE}
 # Example 4
 
 qscores %>% 
   mutate(above_50 = if_else(enrollment > 50, "Large Class", "Small Class")) %>%
   ggplot(data = qscores, mapping = aes(x = hours, y = rating, color = above_50)) + 
     geom_point()
+```
 
+```{r bug-3.5, eval=FALSE}
 # Example 5
 
 qscores %>% 
     mutate(above_50 = if_else(enrollment > 50, "Large Class", "Small Class")) %>%
     ggplot(qscores, aes(x = hours, y = rating, color = above_50)) + 
     geom_point()
+```
 
+```{r bug-3.6, eval=FALSE}
 # Example 6: this one is hard!!!
 
 qscores %>% 
@@ -142,11 +152,19 @@ nes %>%
 Here are some topics that students asked to cover in Recitation:
 
 #### 1. joins (full, inner, left, right, etc.)
+- bind vs. join
 
 #### 2. plot themes
 
 #### 3. if_else
 
 #### 4. pivots
+- wider vs. longer
+- names_to vs. names_from
+- values_to vs. values_from
 
 #### 5. str_detect
+
+#### 6. Objects
+- character exercise 8
+- lists exercise 5
