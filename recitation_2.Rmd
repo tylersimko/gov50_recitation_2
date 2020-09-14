@@ -28,6 +28,8 @@ A very common data source for many of you will be the US Census. You can get a t
 
 ## Spot the bugs!
 
+Error messages are scary but - believe it or not - someone was trying to help you when they wrote it. Most of the time, if you carefully read the error message, you can figure out a rough idea of where your bug is. This is especially true once you start to recognize common patterns in bugs. 
+
 These were very common mistakes from Tutorial 2. Let's find the bugs together:
 
 ```{r, eval=FALSE}
@@ -138,3 +140,7 @@ Here are some topics that students asked to cover in Recitation:
 #### 2. plot themes
 
 #### 3. if_else
+
+#### 4. pivots
+
+#### 5. str_detect
