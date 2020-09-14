@@ -32,7 +32,7 @@ Error messages are scary but - believe it or not - someone was trying to help yo
 
 These were very common mistakes from Tutorial 2. Let's find the bugs together:
 
-```{r, eval=FALSE}
+```{r bug-1, eval=FALSE}
 
 #####################################################
 # 1. I used position_dodge! 
@@ -50,7 +50,9 @@ sps %>%
   ggplot(mapping = aes(x = fct_reorder(education, mean_change_in_expenses), 
                        y = mean_change_in_expenses, fill = treatment)) +
     geom_col(position = position_dodge(preserve = "single"))
+```
 
+```{r bug-2, eval=FALSE}
 #####################################################
 # 2. Attempt to replicate an object of type 
 #####################################################
@@ -74,7 +76,9 @@ shaming %>%
                        y = pct_voted, fill = year)) +
     geom_col(position = position_dodge(preserve = "single")) +
     coord_cartesian(ylim(0.2, 0.45))
+```
 
+```{r bug-3, eval=FALSE}
 #####################################################
 # 3. Object not found
 #####################################################
@@ -120,7 +124,9 @@ qscores %>%
     mutate(above_50 = if_else(enrollment > 50, "Large Class", "Small Class")) %>%
     ggplot(qscores, mapping = aes(x = hours, y = rating, color = above_50)) + 
     geom_point()
+```
 
+```{r bug-4, eval=FALSE}
 #####################################################
 # 4. Unexpected input in
 #####################################################
