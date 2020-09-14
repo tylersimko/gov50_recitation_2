@@ -7,6 +7,11 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+# normally in a .Rmd file, you'll load packages in this first chunk
+
+library(PPBDS.data)
+
 ```
 
 I have played a sneaky trick. By placing this template file on GitHub, we accomplished three goals at once:
@@ -20,6 +25,109 @@ A fourth, smaller, goal is that you can see some cool formatting tricks in RMark
 ## Census Maps
 
 A very common data source for many of you will be the US Census. You can get a ton of demographic information at multiple levels, from the state to the neighborhood level. We're going to walk through [a few sections of the textbook together](https://davidkane9.github.io/PPBDS/maps.html). 
+
+## Spot the bugs!
+
+These were very common mistakes from Tutorial 2. Let's find the bugs together:
+
+```{r, eval=FALSE}
+
+#####################################################
+# 1. I used position_dodge! 
+#    Why are these bars not next to each other?
+#####################################################
+
+sps %>%
+  filter(education %in% c("preschool", "secondary", 
+                          "high school", "college")) %>%
+  select(-c(health_exp_1m, t2_health_exp_1m)) %>%
+  mutate(change_in_expenses = t2_health_exp_3m - health_exp_3m) %>%
+  group_by(treatment, education) %>%
+  summarize(mean_change_in_expenses = mean(change_in_expenses)) %>% 
+  mutate(as.factor(treatment)) %>%
+  ggplot(mapping = aes(x = fct_reorder(education, mean_change_in_expenses), 
+                       y = mean_change_in_expenses, fill = treatment)) +
+    geom_col(position = position_dodge(preserve = "single"))
+
+#####################################################
+# 2. Attempt to replicate an object of type 
+#####################################################
+
+shaming %>%
+  select(primary_04, primary_06, treatment) %>%
+  mutate(primary_04 = if_else(condition = 
+                                str_detect(primary_04, "Yes"),
+                                true = 1L,
+                                false = 0L)) %>%
+  pivot_longer(cols = c(primary_04, primary_06), 
+               names_to = "year", values_to = "voted") %>%
+  group_by(treatment, year, voted) %>%
+  summarize(num_voters = n(), .groups = "drop") %>%
+  mutate(voted = if_else(condition = voted == 1,
+                         true = "did_vote",
+                         false = "did_not_vote")) %>%
+  pivot_wider(names_from = voted, values_from = num_voters)  %>%
+  mutate(pct_voted = did_vote / (did_vote + did_not_vote)) %>% 
+  ggplot(mapping = aes(x = fct_reorder(treatment, pct_voted), 
+                       y = pct_voted, fill = year)) +
+    geom_col(position = position_dodge(preserve = "single")) +
+    coord_cartesian(ylim(0.2, 0.45))
+
+#####################################################
+# 3. Object not found
+#####################################################
+
+# Example 1
+
+cces %>%
+  mutate(Age = Age / 10)
+
+# Example 2
+
+sps %>% 
+  mutate(treatment_string = if_else(treatment == 1, "treatment", "control"))
+
+ggplot(sps, aes(x = age, y = health_exp_3m, fill = treatment_string)) + 
+  geom_col()
+
+# Example 3
+
+sps_edited <- sps %>% 
+  mutate(treatment_string = if_else(treatment == 1, "treatment", "control"))
+
+ggplot(sps, aes(x = age, y = health_exp_3m, fill = treatment_string)) + 
+  geom_col()
+
+# Example 4
+
+qscores %>% 
+  mutate(above_50 = if_else(enrollment > 50, "Large Class", "Small Class")) %>%
+  ggplot(data = qscores, mapping = aes(x = hours, y = rating, color = above_50)) + 
+    geom_point()
+
+# Example 5
+
+qscores %>% 
+    mutate(above_50 = if_else(enrollment > 50, "Large Class", "Small Class")) %>%
+    ggplot(qscores, aes(x = hours, y = rating, color = above_50)) + 
+    geom_point()
+
+# Example 6: this one is hard!!!
+
+qscores %>% 
+    mutate(above_50 = if_else(enrollment > 50, "Large Class", "Small Class")) %>%
+    ggplot(qscores, mapping = aes(x = hours, y = rating, color = above_50)) + 
+    geom_point()
+
+#####################################################
+# 4. Unexpected input in
+#####################################################
+
+nes %>%
+    select(year, education, pres_appr, ideology, voted) %>%
+    filter(education == c(“Some Highschool”, “Highschool”, 
+                           “Some College”, “Adv. Degree”))
+```
 
 ## Some Practice
 
