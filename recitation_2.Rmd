@@ -157,6 +157,7 @@ Here are some topics that students asked to cover in Recitation:
 #### 2. plot themes
 
 #### 3. if_else
+- write code from the inside out
 
 #### 4. pivots
 - wider vs. longer
