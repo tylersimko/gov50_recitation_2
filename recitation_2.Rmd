@@ -155,83 +155,10 @@ Here are some topics that students asked to cover in Recitation:
 #### 1. joins (full, inner, left, right, etc.)
 - bind vs. join
 
-```{r join-example}
-
-## bind example
-arizona <- tibble(state = "Arizona",
-                  famous_senator = "McCain")
-massachusetts <- tibble(state = "Massachusetts",
-                  famous_senator = "Warren")
-
-best_students <- tibble(name  = c("Emma", "Will", "Sabrina"),
-            color = c("Purple", "Powder Blue", "Pink"),
-            HUID  = c("H1", "H2", "H3"))
-
-other_data <- tibble(recitation = "Tuesday 9am")
-
-## other students
-other_students <- tibble(name = c("Yao", "Tyler"),
-                         color = c("Red", "Green"),
-                         HUID = c("H4", "H5"))
-
-bad_students <- tibble(name = c("Redacted", "Unknown"),
-                       fav_color = c("Blue", "Blue"))
-
-## everybody's grades on Tutorial 1
-
-## joins - when you have multiple datasets with information 
-  ## ABOUT THE SAME OBSERVATIONS
-  ## these two datasets have to have the same column
-
-best_students
-
-club_rosters <- tibble(HUID = c("H3", "H2", "H1", "H4"),
-                       club = c("Tennis", "Choir", "Track", "Debate"))
-
-
-## full_join: "by" is the "linking column"
-  ## "by" identifies each observation in both datasets
-full_join(best_students, club_rosters, by = "HUID")
-
-
-## inner_join: will keep only the observations that appear in both datasets
-inner_join(best_students, club_rosters, by = "HUID")
-
-## left_join: keeps all observations in the left ("first") dataset
-left_join(best_students, club_rosters, by = "HUID")
-
-## right_join: keeps all observations in the right ("first") dataset
-right_join(best_students, club_rosters, by = "HUID")
-
-```
-
 #### 2. plot themes
 
 #### 3. if_else
 - write code from the inside out. you can write your if_else statement first! within the if_else, you can write your condition first! no need to write everything at once.
-
-```{r}
-## imagine diamonds are split up into groups
-  ## diamonds with a carat > 0.8 are "super good" diamonds
-
-## make a column with TRUE or FALSE values
-diamonds %>%
-  mutate(above_80 = carat > 0.8) 
-
-## now imagine: 
-  ## instead of TRUE or FALSE, this HAS to say "Super Diamond" or "Bad Diamond"
-
-diamonds %>%
-  # anything that prints TRUE or FALSE for every row
-mutate(super_rating = if_else(condition = carat > 0.8,
-                        true = "Super Diamond", 
-                        false = "Bad Diamond"))
-
-diamonds %>%
-  # anything that prints TRUE or FALSE for every row
-mutate(rating = carat > 0.8)
-                        
-```
 
 #### 4. pivots
 - wider vs. longer
@@ -244,15 +171,7 @@ str_detect helps you find patterns in strings. This can be helpful if the thing 
 
 Notice in diamonds that the cut column has values including "Good" and "Very Good."
 
-There is an entire language called "Regular Expressions" which can make these string searches as complicated as you want. For example, return True for any string that has a two digit number anywhere inside of it. There's no need to learn all of them now, but it's helpful to keep in mind as a tool that you might need for your project.
-
-```{r, eval=FALSE}
-# this will only be true for "Good", false for "Very Good"
-diamonds$cut == "Good"
-
-# this will be true for both "Good" and "Very Good"
-str_detect(diamonds$cut, pattern = "Good")
-```
+There is an entire language called "Regular Expressions" which can make these string searches as complicated as you want. For example, return True for any string that has a two digit number anywhere inside of it. There's no need to learn all of them now, but it's helpful to keep in mind as a tool that you might need for your project. 
 
 #### 6. Objects
 - character exercise 8
